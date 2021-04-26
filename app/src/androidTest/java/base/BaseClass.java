@@ -1,24 +1,18 @@
 package base;
 
-import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
-import androidx.test.platform.app.InstrumentationRegistry;
-import androidx.test.uiautomator.UiDevice;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.rule.ActivityTestRule;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
+import com.example.espresso.LoginActivity;
+
+import org.junit.Rule;
 import org.junit.runner.RunWith;
 
-@RunWith(AndroidJUnit4ClassRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class BaseClass {
-    public static UiDevice device;
 
-    @BeforeClass
-    public static void initDevice() {
-        device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
-    }
+    @Rule
+    public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
 
-    @Before
-    public void start() {
-        StartMainActivityFromHomeScreen.startMainActivityFromHomeScreen();
-    }
+
 }
