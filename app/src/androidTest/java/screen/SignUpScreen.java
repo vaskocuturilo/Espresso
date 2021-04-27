@@ -11,7 +11,6 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -42,24 +41,28 @@ public class SignUpScreen {
     private SignUpScreen enterFullName(String name) {
         onView(withId(R.id.et_name))
                 .perform(typeText(name), closeSoftKeyboard());
+
         return this;
     }
 
     private SignUpScreen enterEmail(String email) {
         onView(withId(R.id.et_email))
                 .perform(typeText(email), closeSoftKeyboard());
+
         return this;
     }
 
     private SignUpScreen enterPassword(String password) {
         onView(withId(R.id.et_password))
                 .perform(typeText(password), closeSoftKeyboard());
+
         return this;
     }
 
     private SignUpScreen enterRePassword(String password) {
         onView(withId(R.id.et_repassword))
                 .perform(typeText(password), closeSoftKeyboard());
+
         return this;
     }
 
@@ -72,9 +75,7 @@ public class SignUpScreen {
 
     private SignUpScreen waitForLoginStatus() {
         try {
-            viewExists(allOf(withId(android.R.id.button1), withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)), LAUNCH_TIME);
-            onView(withId(android.R.id.button1)).check(matches(isDisplayed())).perform(click());
-
+            viewExists(allOf(withId(R.id.logout_button), withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)), LAUNCH_TIME);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -83,6 +84,13 @@ public class SignUpScreen {
 
     public SignUpScreen expectStatusWithMessage(String message) {
         onView(withId(R.id.textView)).check(matches(withText(message)));
+
+        return this;
+    }
+
+    public SignUpScreen expectEmptyErrorMessage(String message) {
+        onView(withId(android.R.id.message)).check(matches(withText(message)));
+
         return this;
     }
 }

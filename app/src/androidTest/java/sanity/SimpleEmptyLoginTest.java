@@ -1,4 +1,4 @@
-package smoke;
+package sanity;
 
 import androidx.test.rule.ActivityTestRule;
 
@@ -10,13 +10,10 @@ import org.junit.Test;
 
 import screen.LoginScreen;
 
-public class SimpleLoginSuccessTest {
+public class SimpleEmptyLoginTest {
 
     private LoginScreen loginScreen;
-
-    private static final String EMAIL = "test@test.ru";
-    private static final String PASSWORD = "qwerty123456";
-    private static final String STATUS_SUCCESS = "Welcome to my app";
+    private static final String ERROR_MESSAGE = "Please, insert an Email and a Password.";
 
     @Rule
     public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
@@ -27,8 +24,10 @@ public class SimpleLoginSuccessTest {
     }
 
     @Test
-    public void simpleLoginSuccessTest() {
-        loginScreen.login(EMAIL, PASSWORD)
-                .expectStatusWithMessage(STATUS_SUCCESS);
+    public void simpleEmptyCredentialTest() {
+        loginScreen.
+                login("",  "")
+                .expectEmptyEmailErrorMessage(ERROR_MESSAGE);
+
     }
 }

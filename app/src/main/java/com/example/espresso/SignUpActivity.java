@@ -87,7 +87,7 @@ public class SignUpActivity extends AppCompatActivity {
                 stringBuilder.append(".");
 
                 if (validationError) {
-                    Toast.makeText(SignUpActivity.this, stringBuilder.toString(), Toast.LENGTH_LONG).show();
+                    alertView(R.string.alert_error, stringBuilder.toString());
                     return;
                 }
 
@@ -104,7 +104,9 @@ public class SignUpActivity extends AppCompatActivity {
                     public void done(final ParseException exception) {
                         if (exception == null) {
                             dlg.dismiss();
-                            alertDisplay("Successful Login", "Welcome " + emailView.getText().toString() + " ");
+                            Intent intent = new Intent(SignUpActivity.this, LogoutActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
 
                         } else {
                             dlg.dismiss();
@@ -134,20 +136,16 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-    private void alertDisplay(final String title, final String message) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this)
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(final DialogInterface dialog, final int which) {
-                        dialog.cancel();
-                        Intent intent = new Intent(SignUpActivity.this, LogoutActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
+    private void alertView(final int title, final String message) {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
                     }
                 });
-        final AlertDialog dialog = builder.create();
-        dialog.show();
+        alertDialog.show();
     }
 }

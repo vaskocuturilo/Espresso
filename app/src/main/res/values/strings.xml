@@ -12,11 +12,12 @@
     <string name="register">Register</string>
     <string name="re_type_password">Re-type Password</string>
     <string name="your_name">Full Name</string>
-    <string name="alert_title">Information message</string>
     <string name="welcome">Welcome to my app</string>
     <string name="logout">Logout</string>
     <string name="profile">Open profile page</string>
     <string name="back4app_server_url">https://parseapi.back4app.com/</string>
     <string name="app_id">PASTE_YOUR_APPLICATION_ID_HERE</string>
     <string name="app_key">PASTE_YOUR_CLIENT_KEY_HERE</string>
+    <string name="alert_title">Information message</string>
+    <string name="alert_error">Error message</string>
 </resources>
