@@ -18,8 +18,6 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
-import static android.app.PendingIntent.getActivity;
-
 public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameView;
@@ -68,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                 builder.append(".");
 
                 if (validationError) {
-                    Toast.makeText(LoginActivity.this, builder.toString(), Toast.LENGTH_LONG).show();
+                    alertView(R.string.alert_error, builder.toString());
                     return;
                 }
 
@@ -82,7 +80,9 @@ public class LoginActivity extends AppCompatActivity {
                     public void done(final ParseUser parseUser, final ParseException parseEx) {
                         if (parseUser != null) {
                             dlg.dismiss();
-                            alertDisplay(R.string.alert_title, "Welcome back " + usernameView.getText().toString() + " ");
+                            Intent intent = new Intent(LoginActivity.this, LogoutActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
                         } else {
                             dlg.dismiss();
                             ParseUser.logOut();
@@ -94,7 +94,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
     private boolean isEmpty(final EditText text) {
         if (text.getText().toString().trim().length() > 0) {
             return false;
@@ -103,20 +102,16 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void alertDisplay(final int title, final String message) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this)
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(final DialogInterface dialog, final int which) {
-                        dialog.cancel();
-                        Intent intent = new Intent(LoginActivity.this, LogoutActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
+    private void alertView(final int title, final String message) {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
                     }
                 });
-        final AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
 }

@@ -1,4 +1,4 @@
-package smoke;
+package sanity;
 
 import androidx.test.rule.ActivityTestRule;
 
@@ -10,14 +10,10 @@ import org.junit.Test;
 
 import screen.SignUpScreen;
 
-public class SimpleSignUpTest {
+public class SimpleEmptySignUpTest {
 
     private SignUpScreen signUpScreen;
-
-    private static final String NAME = "TEST CLIENT";
-    private static final String EMAIL = "qweeee@test.ru";
-    private static final String PASSWORD = "qwerty123456";
-    private static final String STATUS_SUCCESS = "Welcome to my app";
+    private static final String STATUS_SUCCESS = "Please, insert an Full Name an Email  and a Password and your password again.";
 
     @Rule
     public ActivityTestRule<SignUpActivity> activityRule = new ActivityTestRule<>(SignUpActivity.class);
@@ -30,7 +26,7 @@ public class SimpleSignUpTest {
     @Test
     public void simpleSignUpTest() {
         signUpScreen
-                .create(NAME, EMAIL, PASSWORD)
-                .expectStatusWithMessage(STATUS_SUCCESS);
+                .create("", "", "")
+                .expectEmptyErrorMessage(STATUS_SUCCESS);
     }
 }
