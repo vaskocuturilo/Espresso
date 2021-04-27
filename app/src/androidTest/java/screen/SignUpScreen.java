@@ -1,12 +1,10 @@
 package screen;
 
-import android.util.Log;
-
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.rule.ActivityTestRule;
 
-import com.example.espresso.LoginActivity;
 import com.example.espresso.R;
+import com.example.espresso.SignUpActivity;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -20,54 +18,70 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.allOf;
 import static waiter.ViewWaiter.viewExists;
 
-public class LoginScreen {
+public class SignUpScreen {
 
-    public ActivityTestRule<LoginActivity> rule;
+    ActivityTestRule<SignUpActivity> rule;
 
     private final static int LAUNCH_TIME = 5000;
 
-    public LoginScreen(ActivityTestRule<LoginActivity> rule) {
+    public SignUpScreen(ActivityTestRule<SignUpActivity> rule) {
         this.rule = rule;
     }
 
-    public LoginScreen login(String email, String password) {
-        return enterEmail(email)
-                .enterPassword(password)
-                .tapLoginButton()
-                .waitForLoginStatus();
+    public SignUpScreen create(String name, String email, String password) {
+
+        return
+                enterFullName(name)
+                        .enterEmail(email)
+                        .enterPassword(password)
+                        .enterRePassword(password)
+                        .tapRegisterButton()
+                        .waitForLoginStatus();
     }
 
-    private LoginScreen enterEmail(String email) {
+    private SignUpScreen enterFullName(String name) {
+        onView(withId(R.id.et_name))
+                .perform(typeText(name), closeSoftKeyboard());
+        return this;
+    }
+
+    private SignUpScreen enterEmail(String email) {
         onView(withId(R.id.et_email))
                 .perform(typeText(email), closeSoftKeyboard());
         return this;
     }
 
-    private LoginScreen enterPassword(String password) {
+    private SignUpScreen enterPassword(String password) {
         onView(withId(R.id.et_password))
                 .perform(typeText(password), closeSoftKeyboard());
         return this;
     }
 
-    private LoginScreen tapLoginButton() {
-        onView(withId(R.id.btn_login))
-                .perform(click());
+    private SignUpScreen enterRePassword(String password) {
+        onView(withId(R.id.et_repassword))
+                .perform(typeText(password), closeSoftKeyboard());
         return this;
     }
 
-    public LoginScreen waitForLoginStatus() {
+    private SignUpScreen tapRegisterButton() {
+        onView(withId(R.id.btn_register))
+                .perform(click());
+
+        return this;
+    }
+
+    private SignUpScreen waitForLoginStatus() {
         try {
             viewExists(allOf(withId(android.R.id.button1), withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)), LAUNCH_TIME);
             onView(withId(android.R.id.button1)).check(matches(isDisplayed())).perform(click());
-        } catch (InterruptedException ex) {
-            Log.d("MDC-waitForLoginStatus", " The method waitForLoginStatus is down." + ex);
-            throw new RuntimeException("The method waitForLoginStatus is down." + ex);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        onView(withId(android.R.id.button1)).check(matches(isDisplayed())).perform(click());
         return this;
     }
 
-    public LoginScreen expectStatusWithMessage(String message) {
+    public SignUpScreen expectStatusWithMessage(String message) {
         onView(withId(R.id.textView)).check(matches(withText(message)));
         return this;
     }
