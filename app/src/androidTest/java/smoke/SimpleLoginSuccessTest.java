@@ -31,4 +31,10 @@ public class SimpleLoginSuccessTest {
         loginScreen.login(EMAIL, PASSWORD)
                 .expectStatusWithMessage(STATUS_SUCCESS);
     }
+
+    @Test
+    public void simpleLoginSuccessModelTest() {
+        loginScreen.login()
+                .expectStatusWithMessage(STATUS_SUCCESS);
+    }
 }

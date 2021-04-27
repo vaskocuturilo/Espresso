@@ -8,6 +8,8 @@ import androidx.test.rule.ActivityTestRule;
 import com.example.espresso.LoginActivity;
 import com.example.espresso.R;
 
+import model.User;
+
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
@@ -17,6 +19,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibilit
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.allOf;
+import static utils.JsonData.getJsonData;
 import static waiter.ViewWaiter.viewExists;
 
 public class LoginScreen {
@@ -32,6 +35,14 @@ public class LoginScreen {
     public LoginScreen login(String email, String password) {
         return enterEmail(email)
                 .enterPassword(password)
+                .tapLoginButton()
+                .waitForLoginStatus();
+    }
+
+    public LoginScreen login() {
+        User user = getJsonData("account", User.class, "account");
+        return enterEmail(user.getEmail())
+                .enterPassword(user.getPassword())
                 .tapLoginButton()
                 .waitForLoginStatus();
     }
