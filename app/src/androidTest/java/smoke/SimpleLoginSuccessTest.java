@@ -7,9 +7,12 @@ import com.example.espresso.LoginActivity;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import screen.LoginScreen;
 
+@RunWith(AllureAndroidJUnit4.class)
 public class SimpleLoginSuccessTest {
 
     private LoginScreen loginScreen;
