@@ -11,8 +11,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+        testInstrumentationRunner "io.qameta.allure.android.runners.AllureAndroidJUnitRunner"
     }
 
     buildTypes {
@@ -32,17 +31,19 @@ repositories {
     mavenCentral()
     jcenter()
     maven { url 'https://jitpack.io' }
+    maven { url 'https://dl.bintray.com/qameta/maven' }
 }
 
 ext {
     parseVersion = "1.26.0"
     gson = "2.8.6"
+    uiautomator = "2.2.0"
+    extJunit = "1.1.1"
+    allure = "2.2.5"
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.core:core-ktx:1.3.1'
@@ -68,8 +69,8 @@ dependencies {
     androidTestImplementation 'androidx.test:rules:1.2.0'
 
     // Assertions
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.ext:truth:1.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.ext:truth:1.3.0'
 
     // Espresso dependencies
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -79,9 +80,16 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-web:3.2.0'
     androidTestImplementation 'androidx.test.espresso.idling:idling-concurrent:3.2.0'
 
+
+    //allure
+    androidTestImplementation "io.qameta.allure:allure-kotlin-model:$allure"
+    androidTestImplementation "io.qameta.allure:allure-kotlin-commons:$allure"
+    androidTestImplementation "io.qameta.allure:allure-kotlin-junit4:$allure"
+    androidTestImplementation "io.qameta.allure:allure-kotlin-android:$allure"
+
     //Parse SDK
     implementation "com.github.parse-community.Parse-SDK-Android:parse:$parseVersion"
-
-
+    androidTestImplementation "androidx.test.uiautomator:uiautomator:$uiautomator"
+    androidTestImplementation "androidx.test.ext:junit:$extJunit"
 
 }
