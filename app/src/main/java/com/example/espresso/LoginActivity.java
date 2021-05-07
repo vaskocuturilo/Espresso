@@ -1,6 +1,5 @@
 package com.example.espresso;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
