@@ -1,13 +1,17 @@
-# The simple example project how to work with Espresso automation testing framework
+# The simple example project how to work with Espresso automation testing framework.
 
 ## Test scenario:
 - Create application for authorization (Login and Register).
+- Create profile page.
 - Create automation scripts for Login and Register.
+- Create automation scripts for profile page.
+- Create API automation scripts.
 - Generate report for automation scripts. 
     
 ## Requirements:
 - Use any *object-oriented language* (Java or Kotlin).
 - Use Espresso.
+- Use any Http client for API requests.
 - Use automation patterns like *PageObject*, *data-driven* tests, etc.
 - Use any testing frameworks (JUnit or TestNG).
 - Use Gradle. 
@@ -26,6 +30,26 @@ You will need the following technologies available to try it out:
 * JDK 8
 * Android Studio 
 * Web browser Chrome
+
+### Ho w to run
+
+ You need to write in console: 
+ 
+ ### cd test-script
+ 
+ and 
+ 
+```./run-tests.sh ```
+
+  and 
+  
+### After it generated Allure report in automation mode. Will create report folder.    
+
+you can 
+
+### Open Allure report in browser
+
+```open index.html file from report folder```
 
 ![](https://a.radikal.ru/a39/2006/0b/a94fed92741c.png) 
 
