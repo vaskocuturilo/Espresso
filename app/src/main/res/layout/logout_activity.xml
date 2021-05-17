@@ -14,20 +14,6 @@
         android:fontFamily="@font/indigo_daisy"
         android:layout_marginStart="25dp"
         android:layout_marginBottom="10dp"/>
-
-    <Button
-        android:id="@+id/logout_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="1dp"
-        android:layout_toRightOf="@+id/textView"
-        android:background="@drawable/btn_custom"
-        android:fontFamily="@font/roboto_regular"
-        android:text="@string/logout"
-        android:textColor="@android:color/white" />
-
     <Button
         android:id="@+id/profile_button"
         android:layout_width="match_parent"
@@ -39,6 +25,19 @@
         android:background="@drawable/btn_custom"
         android:fontFamily="@font/roboto_regular"
         android:text="@string/profile"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/logout_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/btn_custom"
+        android:fontFamily="@font/roboto_regular"
+        android:layout_below="@id/profile_button"
+        android:text="@string/logout"
         android:textColor="@android:color/white" />
 
 </RelativeLayout>
