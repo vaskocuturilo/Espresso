@@ -6,27 +6,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.parse.ParseUser;
 
-public class LogoutActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.logout_activity);
+        setContentView(R.layout.profile_activity);
 
-        final Button logoutButton = findViewById(R.id.logout_button);
-        final  Button profileButton = findViewById(R.id.profile_button);
+        Button logoutButton = findViewById(R.id.logout_button);
+
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                final ProgressDialog progressDialog = new ProgressDialog(LogoutActivity.this);
+                final ProgressDialog progressDialog = new ProgressDialog(ProfileActivity.this);
                 ParseUser.logOutInBackground(e -> {
                     progressDialog.dismiss();
                     if (e == null) {
@@ -36,18 +33,10 @@ public class LogoutActivity extends AppCompatActivity {
                 });
             }
         });
-
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Intent myIntent = new Intent(LogoutActivity.this, ProfileActivity.class);
-                startActivity(myIntent);
-            }
-        });
     }
 
     private void alertDisplay(final int title, final int message) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(LogoutActivity.this)
+        final AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this)
                 .setTitle(title)
                 .setMessage(message)
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -60,7 +49,7 @@ public class LogoutActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
-                        Intent intent = new Intent(LogoutActivity.this, LoginActivity.class);
+                        Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     }
