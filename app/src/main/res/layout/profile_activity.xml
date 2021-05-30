@@ -30,6 +30,7 @@
                 android:layout_marginTop="20dp"
                 android:text="Personal Profile"/>
             <EditText
+                android:id="@+id/pr_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
@@ -43,6 +44,7 @@
                 android:textSize="15sp"
                 android:hint="Name"/>
             <EditText
+                android:id="@+id/pr_phone_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="phone"
@@ -55,6 +57,7 @@
                 android:layout_marginRight="10dp"
                 android:hint="Phone number"/>
             <EditText
+                android:id="@+id/pr_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
@@ -67,13 +70,14 @@
                 android:layout_marginRight="10dp"
                 android:hint="Email"/>
             <Button
+                android:id="@+id/btn_save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="1dp"
                 android:background="@drawable/btn_custom"
-                android:text="OK"
+                android:text="SAVE"
                 />
 
             <Button
