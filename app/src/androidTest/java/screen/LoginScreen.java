@@ -68,7 +68,7 @@ public class LoginScreen {
         return this;
     }
 
-    public LoginScreen waitForLoginStatus() {
+    private LoginScreen waitForLoginStatus() {
         try {
             viewExists(allOf(withId(R.id.logout_button), withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)), LAUNCH_TIME);
         } catch (InterruptedException ex) {
@@ -83,6 +83,15 @@ public class LoginScreen {
         onView(withId(R.id.textView)).check(matches(withText(message)));
 
         return this;
+    }
+
+    public ProfileScreen tapProfileButton() {
+        onView(withId(R.id.profile_button))
+                .perform(click());
+
+        waitForLoginStatus();
+
+        return new ProfileScreen();
     }
 
     public LoginScreen expectEmptyEmailErrorMessage(String message) {

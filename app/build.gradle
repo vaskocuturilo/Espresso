@@ -11,7 +11,8 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "io.qameta.allure.android.runners.AllureAndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {
