@@ -26,6 +26,7 @@
 You will need the following technologies available to try it out:
 * Git
 * Espresso
+* Retrofit 2
 * Gradle 3+
 * JDK 8
 * Android Studio 

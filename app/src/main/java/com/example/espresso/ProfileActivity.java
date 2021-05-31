@@ -6,11 +6,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.espresso.model.schema.WeatherResponse;
+import com.example.espresso.service.WeatherService;
 import com.parse.ParseUser;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class ProfileActivity extends AppCompatActivity {
+    private TextView weatherInformation;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -18,7 +30,9 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.profile_activity);
 
         Button logoutButton = findViewById(R.id.logout_button);
+        Button saveButton = findViewById(R.id.save_profile_button);
 
+        weatherInformation = findViewById(R.id.weather);
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +45,13 @@ public class ProfileActivity extends AppCompatActivity {
                     }
 
                 });
+            }
+        });
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                creteResponseForCurrentWeather();
             }
         });
     }
@@ -56,5 +77,33 @@ public class ProfileActivity extends AppCompatActivity {
                 });
         final AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    public void creteResponseForCurrentWeather() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(getString(R.string.api_url))
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        WeatherService weatherService = retrofit.create(WeatherService.class);
+        Call<WeatherResponse> weatherResponseCall = weatherService.getCurrentWeather(getString(R.string.api_city), getString(R.string.api_key));
+        weatherResponseCall.enqueue(new Callback<WeatherResponse>() {
+            @Override
+            public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
+                if (response.code() == 200) {
+                    WeatherResponse weatherResponse = response.body();
+                    assert weatherResponse != null;
+
+                    String stringWeather = " The temperature is: " + weatherResponse.getWeather().get(0).getMain();
+
+                    weatherInformation.setText(stringWeather);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<WeatherResponse> call, Throwable t) {
+                weatherInformation.setText(t.getMessage());
+            }
+        });
     }
 }
