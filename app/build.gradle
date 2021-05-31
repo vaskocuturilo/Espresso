@@ -41,6 +41,7 @@ ext {
     uiautomator = "2.2.0"
     extJunit = "1.1.1"
     allure = "2.2.5"
+    retrofit = "2.9.0"
 }
 
 dependencies {
@@ -95,4 +96,7 @@ dependencies {
     androidTestImplementation "androidx.test.uiautomator:uiautomator:$uiautomator"
     androidTestImplementation "androidx.test.ext:junit:$extJunit"
 
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
 }

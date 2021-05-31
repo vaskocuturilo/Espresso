@@ -70,14 +70,14 @@
                 android:layout_marginRight="10dp"
                 android:hint="Email"/>
             <Button
-                android:id="@+id/btn_save"
+                android:id="@+id/save_profile_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="1dp"
                 android:background="@drawable/btn_custom"
-                android:text="SAVE"
+                android:text="Save profile"
                 />
 
             <Button
@@ -92,6 +92,13 @@
                 android:fontFamily="@font/roboto_regular"
                 android:text="@string/logout"
                 android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/weather"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:text="The weather is: "/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
