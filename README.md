@@ -3,6 +3,7 @@
 ## Test scenario:
 - Create application for authorization (Login and Register).
 - Create profile page.
+- Create weather functional for profile page. 
 - Create automation scripts for Login and Register.
 - Create automation scripts for profile page.
 - Create API automation scripts.
@@ -11,9 +12,9 @@
 ## Requirements:
 - Use any *object-oriented language* (Java or Kotlin).
 - Use Espresso.
-- Use any Http client for API requests.
-- Use automation patterns like *PageObject*, *data-driven* tests, etc.
-- Use any testing frameworks (JUnit or TestNG).
+- Use any Http client for API requests. (Retrofit 2)
+- Use automation patterns like *PageObject*, *ScreenObject*, *data-driven* tests, etc.
+- Use any testing frameworks (JUnit).
 - Use Gradle. 
 - provide code and clear instructions how to run it.
 
